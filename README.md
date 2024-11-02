@@ -41,10 +41,13 @@ src/
 ```
 - src/main/java/com/projet/gestionDesACs :
 
--controlleurs :- Contient les classes contrôleurs gérant les requêtes HTTP.
-entities : Contient les classes entités représentant les modèles de données.
-repositories : Contient les interfaces des dépôts pour l'accès aux données.
-src/main/resources/templates : Contient les fichiers Thymeleaf pour les vues.
+`controlleurs :` Contient les classes contrôleurs gérant les requêtes HTTP.
 
-src/main/resources/application.properties : Fichier de configuration de l'application.
+`entities :` Contient les classes entités représentant les modèles de données.
+
+`repositories :` Contient les interfaces des dépôts pour l'accès aux données.
+
+- src/main/resources/templates : Contient les fichiers Thymeleaf pour les vues.
+
+- src/main/resources/application.properties : Fichier de configuration de l'application.
  
