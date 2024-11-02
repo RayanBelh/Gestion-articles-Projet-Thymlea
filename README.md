@@ -53,56 +53,56 @@ src/
 
  ## Diagramme de classe 
 
-### 1. Key Entities
+### 1. Entités Principales
 
-#### `Categorie` Entity
-- **id** : `Long` — Unique identifier for each category.
-- **name** : `String` — Name of the category.
-- **description** : `String` — Brief description of the category.
-- **articles** : `List<Article>` — Collection of articles within this category.
+#### Entité `Categorie`
+- **id** : `Long` — Identifiant unique de chaque catégorie.
+- **name** : `String` — Nom de la catégorie.
+- **description** : `String` — Brève description de la catégorie.
+- **articles** : `List<Article>` — Collection d'articles associés à cette catégorie.
 
-#### `Article` Entity
-- **id** : `Long` — Unique identifier for each article.
-- **title** : `String` — Title of the article.
-- **content** : `String` — Content/body of the article.
-- **publicationDate** : `Date` — Date when the article was published.
-- **categorie** : `Categorie` — Category this article is associated with.
+#### Entité `Article`
+- **id** : `Long` — Identifiant unique de chaque article.
+- **title** : `String` — Titre de l'article.
+- **content** : `String` — Contenu ou corps de l'article.
+- **publicationDate** : `Date` — Date de publication de l'article.
+- **categorie** : `Categorie` — Catégorie à laquelle l'article est associé.
 
-### 2. Entity Relationships
+### 2. Relations entre les Entités
 
-- **Categorie** and **Article** share a bidirectional relationship:
-  - A **Categorie** can contain multiple **Articles** (one-to-many).
-  - An **Article** is associated with a single **Categorie** (many-to-one).
+- **Categorie** et **Article** partagent une relation bidirectionnelle :
+  - Une **Categorie** peut contenir plusieurs **Articles** (relation un-à-plusieurs).
+  - Un **Article** est associé à une seule **Categorie** (relation plusieurs-à-un).
 
-### 3. Repository Interfaces
+### 3. Interfaces de Dépôt (Repositories)
 
 #### `CategorieRepository`
-- Inherits from `JpaRepository<Categorie, Long>`.
-- Provides CRUD methods for the `Categorie` entity.
+- Hérite de `JpaRepository<Categorie, Long>`.
+- Fournit des méthodes CRUD pour l'entité `Categorie`.
 
 #### `ArticleRepository`
-- Inherits from `JpaRepository<Article, Long>`.
-- Provides CRUD methods for the `Article` entity.
-- Custom method: `List<Article> findByCategorieId(Long id)` — Fetches articles linked to a specific category.
+- Hérite de `JpaRepository<Article, Long>`.
+- Fournit des méthodes CRUD pour l'entité `Article`.
+- Méthode personnalisée : `List<Article> findByCategorieId(Long id)` — Récupère les articles liés à une catégorie spécifique.
 
-### 4. Controllers
+### 4. Contrôleurs
 
 #### `ArticleControlleur`
-Handles HTTP requests for managing articles and categories.
+Gère les requêtes HTTP pour la gestion des articles et des catégories.
 
-##### Key Methods:
-- **redirectToArticlesList()** : Redirects to the article list view.
-- **listArticles(Model model)** : Displays the list of all articles.
-- **viewCategory(Long id, Model model)** : Shows details of a category along with its articles.
-- **showAddArticleForm(Model model)** : Shows the form to add a new article.
-- **addArticle(Article article, BindingResult result, Model model)** : Processes the creation of a new article.
-- **showEditArticleForm(long id, Model model)** : Displays the form to edit an article.
-- **handleUpdateOrDelete(long id, String action, Article article, BindingResult result, Model model)** : Processes update or deletion of an article based on specified action.
+##### Méthodes principales :
+- **redirectToArticlesList()** : Redirige vers la vue de la liste des articles.
+- **listArticles(Model model)** : Affiche la liste de tous les articles.
+- **viewCategory(Long id, Model model)** : Affiche les détails d'une catégorie avec ses articles.
+- **showAddArticleForm(Model model)** : Affiche le formulaire pour ajouter un nouvel article.
+- **addArticle(Article article, BindingResult result, Model model)** : Traite la création d'un nouvel article.
+- **showEditArticleForm(long id, Model model)** : Affiche le formulaire de modification d'un article.
+- **handleUpdateOrDelete(long id, String action, Article article, BindingResult result, Model model)** : Gère la mise à jour ou la suppression d'un article en fonction de l'action spécifiée.
 
-### 5. Class Relationships
+### 5. Relations entre les Classes
 
-- **ArticleControlleur** depends on **ArticleRepository** and **CategorieRepository** for data access.
-- **ArticleRepository** and **CategorieRepository** interact with **Article** and **Categorie** entities.
-- **Article** and **Categorie** are connected by a bidirectional association as described.
+- **ArticleControlleur** dépend de **ArticleRepository** et **CategorieRepository** pour l'accès aux données.
+- **ArticleRepository** et **CategorieRepository** interagissent avec les entités **Article** et **Categorie**.
+- **Article** et **Categorie** sont connectés par une association bidirectionnelle comme décrit ci-dessus.
 
-This project structure and class relationships improve code organization and support effective maintenance and scalability.
+Cette structure et ces relations entre classes améliorent l'organisation du code et soutiennent une maintenance et une évolutivité efficaces.
