@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter un Article</title>
+  <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8fafc;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+
+    form {
+        background-color: #b0c4de;
+        color: #2c3e50;
+        margin: 15px auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    form:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 1em;
+    }
+
+    button[type="submit"] {
+        background-color: #3498db;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 1em;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Ajouter un Nouvel Article</h1>
+  <form th:action="@{/add-article}" th:object="${article}" method="post">
+    <label for="title">Titre :</label>
+    <input type="text" id="title" th:field="*{title}" />
+
+    <label for="content">Contenu :</label>
+    <textarea id="content" th:field="*{content}"></textarea>
+
+    <label for="categorie">Catégorie:</label>
+    <select id="categorie" th:field="*{categorie.id}">
+      <option th:each="categorie : ${categories}"
+              th:value="${categorie.id}"
+              th:text="${categorie.name}">
+      </option>
+    </select>
+
+    <button type="submit">Enregistrer l'Article</button>
+  </form>
+</div>
+</body>
+</html>

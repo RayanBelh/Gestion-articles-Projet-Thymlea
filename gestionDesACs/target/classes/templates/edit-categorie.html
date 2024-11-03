@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier la Catégorie</title>
+  <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8fafc;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #b0c4de;
+        color: #2c3e50;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .form-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .submit-button, .delete-button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 48%;
+    }
+
+    .submit-button {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .submit-button:hover {
+        background-color: #2980b9;
+    }
+
+    .delete-button {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .delete-button:hover {
+        background-color: #c82333;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    .back-link:hover {
+        color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Modifier la Catégorie</h1>
+
+<div class="form-container">
+  <!-- Formulaire pour la mise à jour et la suppression -->
+  <form th:action="@{/categories/edit-categorie/{id}(id=${categorie.id})}" method="post" th:object="${categorie}">
+    <label for="name">Nom de la catégorie :</label>
+    <input type="text" id="name" th:field="*{name}" placeholder="Entrez le nom de la catégorie" required />
+
+    <label for="description">Description :</label>
+    <textarea id="description" th:field="*{description}" placeholder="Entrez une description de la catégorie" required></textarea>
+
+    <div class="button-group">
+      <!-- Bouton pour soumettre la mise à jour -->
+      <button type="submit" name="action" value="update" class="submit-button">Enregistrer les modifications</button>
+
+      <!-- Bouton pour soumettre la suppression -->
+      <button type="submit" name="action" value="delete" class="delete-button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">Supprimer la Catégorie</button>
+    </div>
+  </form>
+
+  <!-- Lien de retour à la liste des catégories -->
+  <a th:href="@{/articles-list}" class="back-link">Retour à la Liste des Articles</a>
+
+
+</div>
+
+</body>
+</html>

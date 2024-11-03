@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Articles</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            background-image: url('/images/background.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        header p {
+            color: #34495e;
+            font-size: 1.2em;
+            margin: 10px 0 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .categorie {
+            background-color: rgba(176, 196, 222, 0.9);
+            color: #2c3e50;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .categorie:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .categorie h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .article {
+            background: #f0f8ff;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .article:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .article-title {
+            text-decoration: none;
+            color: #34495e;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .add-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .add-links a {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 1em;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .add-links a:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Bienvenue sur notre site d'articles</h1>
+    <p>Découvrez nos catégories et les articles associés.</p>
+</header>
+
+<div class="categories-container">
+    <div th:each="categorie : ${categories}" class="categorie">
+        <h2>
+            <a th:href="@{/categories/{id}(id=${categorie.id})}" th:text="${categorie.name}"></a>
+        </h2>
+        <ul>
+            <li th:each="article : ${categorie.articles}" class="article">
+                <span class="article-title" th:text="${article.title}"></span>
+            </li>
+        </ul>
+        <!-- Lien pour modifier la catégorie -->
+        <div class="action-links">
+            <a th:href="@{/categories/edit-categorie/{id}(id=${categorie.id})}">Modifier la Catégorie</a>
+        </div>
+    </div>
+</div>
+
+<div class="add-links">
+    <p>
+        <a th:href="@{/categories/add-categorie}">Ajouter une nouvelle catégorie</a>
+        <a th:href="@{/add-article}">Ajouter un nouvel article</a>
+    </p>
+</div>
+
+</body>
+</html>

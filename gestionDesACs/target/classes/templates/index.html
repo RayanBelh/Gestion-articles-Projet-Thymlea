@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des Catégories et Articles</title>
+</head>
+<body>
+<h1>Liste des Catégories et Articles</h1>
+
+<div th:switch="${categories}">
+    <h2 th:case="null">Aucune catégorie pour l'instant !</h2>
+    <div th:case="*">
+        <h2>Catégories</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nom de la Catégorie</th>
+                <th>Description</th>
+                <th>Articles</th>
+                <th>Détails</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="categorie : ${categories}">
+                <td th:text="${categorie.name}"></td>
+                <td th:text="${categorie.description}"></td>
+                <td>
+                    <!-- Liste des titres des articles associés -->
+                    <ul>
+                        <li th:each="article : ${categorie.articles}" th:text="${article.title}"></li>
+                    </ul>
+                </td>
+                <td><a th:href="@{/categories/{id}(id=${categorie.id})}">Voir Détails</a></td>
+                <!-- Lien pour modifier la catégorie -->
+                <td><a th:href="@{/categories/edit-categorie/{id}(id=${categorie.id})}">Modifier</a></td>
+                <td><a th:href="@{/delete-categorie/{id}(id=${categorie.id})}">Supprimer</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<p>
+    <a th:href="@{/add-categorie}">Ajouter une nouvelle catégorie</a>
+</p>
+</body>
+</html>

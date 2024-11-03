@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Détails de la Catégorie</title>
+  <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f0f8ff, #b0c4de);
+        margin: 0;
+        padding: 20px;
+        animation: backgroundGradient 10s infinite alternate;
+    }
+
+    @keyframes backgroundGradient {
+        0% { background: linear-gradient(135deg, #f0f8ff, #b0c4de); }
+        100% { background: linear-gradient(135deg, #b0c4de, #f0f8ff); }
+    }
+
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .category-table th, .category-table td {
+        padding: 15px;
+        text-align: left;
+    }
+
+    .category-header {
+        background-color: #3498db;
+        color: white;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    .category-description {
+        background-color: #f0f8ff;
+        color: #2c3e50;
+        font-size: 1em;
+    }
+
+    .articles-header {
+        background-color: #3498db;
+        color: white;
+        font-size: 1.1em;
+    }
+
+    .article-row {
+        background-color: #e9ecef;
+        transition: background-color 0.3s;
+    }
+
+    .article-row:nth-child(even) {
+        background-color: #f0f8ff;
+    }
+
+    .article-row:hover {
+        background-color: #d6eaf8;
+    }
+
+    .article-title {
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    .action-links a {
+        background-color: #3498db;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 0.9em;
+        text-decoration: none;
+        margin-right: 8px;
+        transition: background-color 0.3s;
+    }
+
+    .action-links a:hover {
+        background-color: #2980b9;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        background-color: #3498db;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        max-width: 180px;
+        margin: 30px auto;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        font-size: 0.9em;
+    }
+
+    .back-link:hover {
+        background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Détails de la Catégorie</h1>
+
+<table class="category-table">
+  <tr class="category-header">
+    <th colspan="2" th:text="${categorie.name}">Nom de la Catégorie</th>
+  </tr>
+  <tr class="category-description">
+    <td colspan="2" th:text="${categorie.description}">Description de la catégorie</td>
+  </tr>
+  <tr class="articles-header">
+    <th>Titre de l'Article</th>
+    <th>Actions</th>
+  </tr>
+  <tr th:each="article : ${categorie.articles}" class="article-row">
+    <td>
+      <span class="article-title" th:text="${article.title}">Titre de l'Article</span>
+      <p th:text="${article.content}" style="color: #4a4a4a; font-size: 0.9em;">Contenu de l'article</p>
+    </td>
+    <td class="action-links">
+      <a th:href="@{/edit-article/{id}(id=${article.id})}">Modifier</a>
+      <a th:href="@{/delete-article/{id}(id=${article.id})}"
+         onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">Supprimer</a>
+    </td>
+  </tr>
+</table>
+
+<a th:href="@{/articles}" class="back-link">Retour à la Liste des catégories et articles</a>
+
+</body>
+</html>
