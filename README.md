@@ -91,13 +91,13 @@ src/
 Gère les requêtes HTTP pour la gestion des articles et des catégories.
 
 ##### Méthodes principales :
-- `**redirectToArticlesList()** :` Redirige vers la vue de la liste des articles.
-- **listArticles(Model model)** : Affiche la liste de tous les articles.
-- **viewCategory(Long id, Model model)** : Affiche les détails d'une catégorie avec ses articles.
-- **showAddArticleForm(Model model)** : Affiche le formulaire pour ajouter un nouvel article.
-- **addArticle(Article article, BindingResult result, Model model)** : Traite la création d'un nouvel article.
-- **showEditArticleForm(long id, Model model)** : Affiche le formulaire de modification d'un article.
-- **handleUpdateOrDelete(long id, String action, Article article, BindingResult result, Model model)** : Gère la mise à jour ou la suppression d'un article en fonction de l'action spécifiée.
+- `redirectToArticlesList() :` Redirige vers la vue de la liste des articles.
+- `listArticles(Model model) :` Affiche la liste de tous les articles.
+- `viewCategory(Long id, Model model) :` Affiche les détails d'une catégorie avec ses articles.
+- `showAddArticleForm(Model model) :` Affiche le formulaire pour ajouter un nouvel article.
+- `addArticle(Article article, BindingResult result, Model model) :` Traite la création d'un nouvel article.
+- `showEditArticleForm(long id, Model model) :` Affiche le formulaire de modification d'un article.
+- `handleUpdateOrDelete(long id, String action, Article article, BindingResult result, Model model) :` Gère la mise à jour ou la suppression d'un article en fonction de l'action spécifiée.
 
 #### `CategorieControlleur`
 
